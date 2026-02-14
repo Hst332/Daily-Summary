@@ -45,7 +45,8 @@ jobs:
 
       - name: Build combined summary
         run: |
-          python scripts/build_summary.py
+          python build_summary.py
+
 
       - name: Commit & push summary
         run: |

@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Wait 1 minutes (buffer)
-        run: sleep 720
+        run: sleep 10
 
       - name: Checkout summary repo
         uses: actions/checkout@v4

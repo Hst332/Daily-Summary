@@ -55,3 +55,19 @@ jobs:
           git add daily_summary.md
           git commit -m "Daily summary update" || echo "No changes"
           git push
+          
+      - name: Post summary to Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('daily_summary.md', 'utf8');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 1,   // ggf. anpassen
+              body
+            });
+
+

@@ -3,7 +3,7 @@ name: Daily Combined Summary
 on:
   schedule:
     # Werktags 07:45 Europe/Vienna (UTC 06:45)
-    - cron: "10 6 * * 1-5"
+    - cron: "45 6 * * 1-5"
   workflow_dispatch:
 
 permissions:
@@ -45,29 +45,7 @@ jobs:
 
       - name: Build combined summary
         run: |
-          python build_summary.py
-
-                - name: Install PDF dependency
-        run: |
-          pip install reportlab
-
-      - name: Build PDF
-        run: |
-          python make_pdf.py
-
-      - name: Send email with PDF (Gmail SMTP)
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: ${{ secrets.SMTP_SERVER }}
-          server_port: ${{ secrets.SMTP_PORT }}
-          username: ${{ secrets.SMTP_USERNAME }}
-          password: ${{ secrets.SMTP_PASSWORD }}
-          subject: "Daily Combined Summary"
-          to: ${{ secrets.MAIL_TO }}
-          from: ${{ secrets.SMTP_USERNAME }}
-          body: "Anbei die tägliche Zusammenfassung als PDF."
-          attachments: daily_summary.pdf
-
+          python scripts/build_summary.py
 
       - name: Commit & push summary
         run: |

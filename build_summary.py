@@ -8,51 +8,46 @@ OUT_FILE = "daily_summary.md"
 
 def read_indizes():
     if not os.path.exists(INDIZES_CSV):
-        return "### Indizes\n⚠️ Datei nicht gefunden: `forecasts/daily_index_forecast.csv`\n"
+        return "## Indizes\n⚠️ Datei nicht gefunden.\n"
 
     df = pd.read_csv(INDIZES_CSV)
 
-    # robust: nur Spalten nehmen, die es wirklich gibt
-    wanted = ["asset", "signal", "confidence", "prob_up", "prob_down", "close", "daily_return", "regime"]
+    wanted = ["asset","signal","confidence","prob_up","prob_down","close","daily_return","regime"]
     cols = [c for c in wanted if c in df.columns]
-    df = df[cols].copy()
+    df = df[cols]
 
-    # Formatierungen (falls Spalten existieren)
     if "daily_return" in df.columns:
-        # in deinem Repo ist daily_return bereits Prozentwerte, wir formatieren sanft
         df["daily_return"] = df["daily_return"].map(lambda x: f"{x:.2f}%" if pd.notna(x) else "")
-    for c in ["confidence", "prob_up", "prob_down"]:
+
+    for c in ["confidence","prob_up","prob_down"]:
         if c in df.columns:
             df[c] = df[c].map(lambda x: f"{x:.2f}" if pd.notna(x) else "")
 
-    md = "### Indizes\n\n"
-    md += df.to_markdown(index=False)
-    md += "\n"
-    return md
+    return "## Indizes\n\n" + df.to_markdown(index=False) + "\n\n"
+
 
 def read_rohstoffe():
     if not os.path.exists(ROHSTOFFE_TXT):
-        return "### Rohstoffe\n⚠️ Datei nicht gefunden: `forecast_output.txt`\n"
+        return "## Rohstoffe\n⚠️ Datei nicht gefunden.\n"
 
     lines = open(ROHSTOFFE_TXT, "r", encoding="utf-8", errors="replace").read().splitlines()
-
-    # kompakt: nimm die ersten ~120 Zeilen (da stehen i.d.R. Tabelle + Kernaussagen)
     head = lines[:120]
 
-    md = "### Rohstoffe\n\n"
-    md += "```\n" + "\n".join(head) + "\n```\n"
-    return md
+    return "## Rohstoffe\n\n```\n" + "\n".join(head) + "\n```\n\n"
+
 
 def main():
     now = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
-    md = f"# Daily Combined Summary\n\n_Generated: {now}_\n\n"
-    md += read_indizes() + "\n"
-    md += read_rohstoffe() + "\n"
+
+    md = f"# Daily Combined Summary\n\nGenerated: {now}\n\n"
+    md += read_indizes()
+    md += read_rohstoffe()
 
     with open(OUT_FILE, "w", encoding="utf-8") as f:
         f.write(md)
 
-    print(f"Wrote {OUT_FILE}")
+    print("Summary created.")
+
 
 if __name__ == "__main__":
     main()

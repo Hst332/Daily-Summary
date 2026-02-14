@@ -3,7 +3,7 @@ name: Daily Combined Summary
 on:
   schedule:
     # Werktags 07:45 Europe/Vienna (UTC 06:45)
-    - cron: "45 6 * * 1-5"
+    - cron: "10 6 * * 1-5"
   workflow_dispatch:
 
 permissions:

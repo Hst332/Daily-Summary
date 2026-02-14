@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Wait 12 minutes (buffer)
+      - name: Wait 1 minutes (buffer)
         run: sleep 720
 
       - name: Checkout summary repo

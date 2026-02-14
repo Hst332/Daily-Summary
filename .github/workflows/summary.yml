@@ -1,0 +1,72 @@
+name: Daily Combined Summary
+
+on:
+  schedule:
+    # Werktags 07:45 Europe/Vienna (UTC 06:45)
+    - cron: "45 6 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait 12 minutes (buffer after source workflows)
+        run: sleep 720
+
+      - name: Checkout summary repo
+        uses: actions/checkout@v4
+
+      - name: Checkout Indizes repo
+        uses: actions/checkout@v4
+        with:
+          repository: OWNER/2026Indizes-main
+          path: indizes
+          token: ${{ secrets.READ_REPOS_PAT }}
+
+      - name: Checkout Rohstoffe repo
+        uses: actions/checkout@v4
+        with:
+          repository: OWNER/2026ROHSTOFFE-main
+          path: rohstoffe
+          token: ${{ secrets.READ_REPOS_PAT }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas tabulate
+
+      - name: Build combined summary
+        run: |
+          python scripts/build_summary.py
+
+      - name: Commit & push summary file
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add daily_summary.md
+          git commit -m "Daily summary update" || echo "No changes"
+          git push
+
+      # OPTIONAL: Kommentar in ein Issue #1 posten (für Mail/Notifications)
+      - name: Post to Issue comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('daily_summary.md', 'utf8');
+            const issue_number = 1; // Issue im Summary-Repo anlegen: "Daily Summary"
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number,
+              body
+            });

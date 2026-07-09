@@ -1,29 +1,29 @@
 # Daily Combined Summary
 
-Generated: 2026-07-08 08:44 UTC
+Generated: 2026-07-09 09:58 UTC
 
 ## Indizes
 
 | asset   | signal   |   confidence |   prob_up |    close | daily_return   | regime   |
 |:--------|:---------|-------------:|----------:|---------:|:---------------|:---------|
-| DAX     | SELL     |         0.31 |      0.35 | 25221.5  | 0.00%          | neutral  |
-| ATX     | SELL     |         0.18 |      0.41 |  6457.1  | 0.00%          | neutral  |
-| DOW     | HOLD     |         0.01 |      0.5  | 52914    | 0.14%          | neutral  |
-| NASDAQ  | HOLD     |         0.05 |      0.53 | 25819.6  | 0.15%          | neutral  |
-| SP500   | HOLD     |         0.01 |      0.51 |  7503.36 | 0.13%          | neutral  |
-| NIKKEI  | HOLD     |         0.01 |      0.5  | 67171.7  | -0.25%         | neutral  |
+| DAX     | BUY      |         0.11 |      0.55 | 24938    | -0.37%         | neutral  |
+| ATX     | BUY      |         0.17 |      0.59 |  6448.79 | -0.18%         | neutral  |
+| DOW     | BUY      |         0.21 |      0.6  | 52337.4  | -0.02%         | neutral  |
+| NASDAQ  | BUY      |         0.43 |      0.71 | 25868.3  | 0.15%          | neutral  |
+| SP500   | BUY      |         0.27 |      0.63 |  7481.46 | 0.03%          | neutral  |
+| NIKKEI  | BUY      |         0.14 |      0.57 | 67830.8  | -0.38%         | neutral  |
 
 ## Rohstoffe
 
 ```
-Run time (UTC): 2026-07-08 08:30:09
+Run time (UTC): 2026-07-09 09:41:06
 ==========================================================================================================================================================================
 ASSET         CLOSE     SCORE   SIGNAL       1-5D      2-3W      GPT 1-5D   GPT 2-3W   FINAL           DATA_OK  LAST_BAR_UTC        AGE_s  AGE_h  ROWS  NAN_LAST  STALE  ZUSATZINFO
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-GOLD          4105.5    0.469   NO_TRADE   0.0091   -0.052   Neutral   Neutral    NO_TRADE         True    2026-07-08        30608   8.50   124         0      0  Score unter Gold-Entry
-SILVER          60.5    0.432   NO_TRADE   0.0068   -0.1345  Neutral   Neutral    NO_TRADE         True    2026-07-08        30608   8.50   124         0      0  Score unter Silver-Entry
-NATURAL GAS      3.3    0.610   TRADE      0.0363   0.0303   Neutral   Neutral    LONG             True    2026-07-08        30608   8.50   124         0      0  Gas LONG-Regel
-COPPER           6.1    0.425   NO_TRADE   0.004    -0.0526  Neutral   Neutral    NO_TRADE         True    2026-07-08        30609   8.50   124         0      0  Score unter Copper-Entry
+GOLD          4117.2    0.478   NO_TRADE   0.0011   -0.0554  Neutral   Neutral    NO_TRADE         True    2026-07-09        34866   9.69   124         0      0  Score unter Gold-Entry
+SILVER          59.6    0.418   NO_TRADE   -0.0173  -0.157   Neutral   Neutral    NO_TRADE         True    2026-07-09        34866   9.69   124         0      0  Score unter Silver-Entry
+NATURAL GAS      3.2    0.524   NO_TRADE   0.005    0.0213   Neutral   Neutral    NO_TRADE         True    2026-07-09        34866   9.69   124         0      0  Gas Neutralzone
+COPPER           6.2    0.522   NO_TRADE   0.0184   -0.0393  Neutral   Neutral    NO_TRADE         True    2026-07-09        34866   9.69   124         0      0  Score unter Copper-Entry
 ==========================================================================================================================================================================
 
 SIGNAL ACCURACY (EVALUATED TRADES) – Horizon: 5 Trading Days
